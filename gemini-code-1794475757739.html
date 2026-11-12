@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta Reyes Magos · Juan Gutiérrez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --night: #0b1030;
+      --night-top: #1d2766;
+      --night-deep: #05071a;
+      --wine: #7a1530;
+      --pine: #1a6a4d;
+      --pine-light: #268c67;
+      --gold: #f4c95d;
+      --gold-hover: #fae094;
+      --cream: #fff4dc;
+      --cream-muted: rgba(255, 244, 220, 0.72);
+      --card-bg: rgba(11, 16, 48, 0.68);
+      --border-gold: rgba(244, 201, 93, 0.24);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--cream);
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 50% 0%, var(--night-top), var(--night) 55%, var(--night-deep)) fixed;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Fondo estrellado sutil */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.65;
+      animation: twinkle 4s ease-in-out infinite alternate;
+      background-image: 
+        radial-gradient(2px 2px at 15% 22%, var(--gold), transparent),
+        radial-gradient(1.5px 1.5px at 82% 18%, var(--cream), transparent),
+        radial-gradient(2px 2px at 72% 75%, var(--gold), transparent),
+        radial-gradient(1.5px 1.5px at 25% 70%, var(--cream), transparent),
+        radial-gradient(1px 1px at 50% 12%, var(--gold), transparent);
+    }
+
+    /* Barra de navegación superior */
+    .navbar {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      background: rgba(11, 16, 48, 0.6);
+      border: 1px solid var(--border-gold);
+      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+
+    .nav-back:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      transform: translateX(-3px);
+    }
+
+    .nav-back svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav-brand {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cream-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* Contenedor central */
+    .container {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1.5rem 3rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-gold);
+      border-radius: 24px;
+      padding: 3rem 2.25rem;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      box-shadow: 
+        0 25px 50px -12px rgba(5, 7, 26, 0.85),
+        inset 0 1px 0 0 rgba(244, 201, 93, 0.2);
+      animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Ilustración minimalista de árbol y estrella */
+    .tree-emblem {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      background: radial-gradient(circle at 50% 30%, rgba(244, 201, 93, 0.14), rgba(26, 106, 77, 0.12));
+      border: 1px solid rgba(244, 201, 93, 0.25);
+    }
+
+    .tree-emblem svg {
+      width: 46px;
+      height: 46px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      background: rgba(122, 21, 48, 0.45);
+      border: 1px solid rgba(244, 201, 93, 0.25);
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 1.95rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+
+    .subtitle {
+      font-size: 0.92rem;
+      color: var(--cream-muted);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    .btn-notion {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      width: 100%;
+      background-color: var(--gold);
+      color: var(--night-deep);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 18px rgba(244, 201, 93, 0.25);
+    }
+
+    .btn-notion:hover {
+      background-color: var(--gold-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(244, 201, 93, 0.38);
+    }
+
+    .btn-notion:active {
+      transform: translateY(0);
+    }
+
+    .btn-notion svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.45; }
+      to { opacity: 0.85; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="../" class="nav-back">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Volver al inicio</span>
+    </a>
+    <span class="nav-brand">Juan Gutierrez</span>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="tree-emblem" aria-hidden="true">
+        <!-- Arbolito minimalista en verde pino con estrella y adornos dorados -->
+        <svg viewBox="0 0 64 64" fill="none">
+          <!-- Estrella superior -->
+          <path d="M32 6L34.2 11.4L40 11.9L35.6 15.7L36.9 21.4L32 18.3L27.1 21.4L28.4 15.7L24 11.9L29.8 11.4L32 6Z" fill="#f4c95d"/>
+          <!-- Copa superior -->
+          <path d="M32 19L21 33H43L32 19Z" fill="#268c67"/>
+          <!-- Copa media -->
+          <path d="M32 28L17 44H47L32 28Z" fill="#1a6a4d"/>
+          <!-- Copa inferior -->
+          <path d="M32 37L13 53H51L32 37Z" fill="#14543d"/>
+          <!-- Tronco -->
+          <rect x="29" y="53" width="6" height="6" rx="1.5" fill="#f4c95d" fill-opacity="0.85"/>
+          <!-- Detalles / bolas navideñas -->
+          <circle cx="28" cy="30" r="1.6" fill="#f4c95d"/>
+          <circle cx="37" cy="40" r="1.8" fill="#f4c95d"/>
+          <circle cx="24" cy="48" r="1.8" fill="#7a1530" stroke="#f4c95d" stroke-width="0.8"/>
+          <circle cx="40" cy="49" r="1.6" fill="#f4c95d"/>
+        </svg>
+      </div>
+
+      <span class="badge">Edición 2026 – 2027</span>
+      <h1>Carta Reyes Magos</h1>
+      <p class="subtitle">Lista de ideas y deseos organizada en Notion.</p>
+
+      <a href="https://juangc.notion.site/Carta-Reyes-Magos-2026-2027-3e9e0197615980b1bc25fda4994aa69f?source=copy_link" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="btn-notion">
+        <span>Abrir documento Carta Reyes Magos</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </a>
+    </section>
+  </main>
+
+</body>
+</html>
